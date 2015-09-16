@@ -1,0 +1,36 @@
+﻿#DECLARE startDate string = "2015-9-01";
+
+#DECLARE endDate string = "2015-9-02";
+
+MODULE "/shares/OSIAdhoc/local/Resources/Modules/SystemHealth.Partners.module";
+
+
+
+ClientActiveProcessSessions =
+
+    SELECT            Alias,
+
+           ProcessSessionId,
+
+           DistinctInteractionSessionCount,
+
+           SqmAppId,
+
+           UserName,
+
+           DomainName
+
+    FROM SystemHealthPartners.ViewClientProcessSessions
+         (
+
+             IsProduction = false,
+
+             StartDate = DateTime.Parse(@startDate),
+
+             EndDate = DateTime.Parse(@endDate)
+
+         )
+
+    
+
+OUTPUT TO "/my/myOptinReport_sanjeb.log";
